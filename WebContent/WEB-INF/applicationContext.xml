@@ -43,8 +43,16 @@
 		</property>
 	</bean>
 	
-	
-	
+	<bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate" lazy-init="false">
+		<property name="dataSource" ref="springDataSource"/>
+		<property name="baseLineOnMigrate" value="true"/>
+		<property name="table" value="version"/>
+		<property name="sqlMigrationPrefix" value="v"/>
+		<property name="sqlMigrationSeparator" value="_"/>
+		<property name="encoding" value="ISO-8859-1"/>
+		<property name="validateOnMigrate" value="true"/>
+	</bean>
+		
 	
 	<bean id="transactionManager" name="transactionManager"
 	 class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
@@ -52,7 +60,7 @@
 	  <property name="dataSource" ref="springDataSource"/>
 	</bean>
 	
-	<bean id="jdbcTemlate" name="jdbcTemlate"
+	<bean id="jdbcTemlate" name="jdbcTemlate" 
 	 class="br.com.framework.implementacao.crud.JdbcTemplateImpl">
 		<constructor-arg name="dataSource" ref="springDataSource"/>
 	</bean>
@@ -63,11 +71,11 @@
 	</bean>
 	
 	
-	  <bean id="simpleJdbcInsert" name="simpleJdbcInsert" class="br.com.framework.implementacao.crud.SimpleJdbcInsertImplents" lazy-init="false">
+	 <bean id="simpleJdbcInsert" name="simpleJdbcInsert" class="br.com.framework.implementacao.crud.SimpleJdbcInsertImplents" lazy-init="false">
      	<constructor-arg name="dataSource" ref="springDataSource"/>
      </bean>
      
-      <bean id="simpleJdbcClassImpl" name="simpleJdbcClassImpl" class="br.com.framework.implementacao.crud.SimpleJdbcClassImpl" lazy-init="false">
+     <bean id="simpleJdbcClassImpl" name="simpleJdbcClassImpl" class="br.com.framework.implementacao.crud.SimpleJdbcClassImpl" lazy-init="false">
          <constructor-arg name="dataSource" ref="springDataSource"/>
      </bean>
 	
